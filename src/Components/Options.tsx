@@ -9,9 +9,9 @@ const Options = ({ options, id }: { options: Array<IOption>; id: number }) => {
     const [selectedOption, setSelectedOption] = useState('');
 
     const handleAnswer = async (selectedId: string) => {
-        setSelectedOption(selectedId);
         const res = await GET(`${URL_OBJ.REVEAL_ANSWER}${id}`);
         setCorrectOption(res.correct_options[0].id);
+        setSelectedOption(selectedId);
     };
 
     const correctStyle = {

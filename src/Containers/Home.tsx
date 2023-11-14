@@ -1,40 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import {
-    ActivityIndicator,
-    StyleSheet,
-    View,
-} from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import Swiper from 'react-native-swiper';
 
 import { GET } from '../Services/APIService';
 import { IForYouData } from '../Types';
 import MCQBody from '../Components/MCQBody';
 import { URL_OBJ } from '../Utils/constants';
+import ForYou from '../Components/ForYou';
 
 const Home = () => {
-    const [forYouData, setForYouData] = useState<IForYouData>();
-    const [loading, setLoading] = useState(true);
+    const [urlList, setUrlList] = useState([
+        URL_OBJ.FOR_YOU,
+        URL_OBJ.FOR_YOU,
+        URL_OBJ.FOR_YOU,
+    ]);
 
-    const getForYouData = async () => {
-        const res = await GET(URL_OBJ.FOR_YOU);
-        setForYouData(res);
-        setLoading(false);
+    const handleAddImage = (index: number) => {
+        if (index >= urlList.length - 1)
+            setUrlList(prevList => [...prevList, URL_OBJ.FOR_YOU]);
     };
-
-    useEffect(() => {
-        getForYouData();
-    }, []);
-
-    if (loading) {
-        return (
-            <View style={styles.loadingContainer}>
-                <ActivityIndicator size="large" />
-            </View>
-        )
-    }
 
     return (
         <View style={styles.container}>
-            <MCQBody data={forYouData} />
+            <Swiper
+                onIndexChanged={handleAddImage}
+                showsPagination={false}
+                horizontal={false}
+                loop={false}>
+                {urlList?.map((url, idx) => (
+                    <ForYou key={idx} url={url} />
+                ))}
+            </Swiper>
         </View>
     );
 };
@@ -43,11 +39,11 @@ const styles = StyleSheet.create({
     loadingContainer: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     container: {
         flex: 1,
-    }
+    },
 });
 
 export default Home;

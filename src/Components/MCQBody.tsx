@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
+import EntypoIcon from 'react-native-vector-icons/Entypo';
 import { IForYouData } from '../Types';
 import Header from './Header';
 import Options from './Options';
@@ -17,7 +18,7 @@ const dummyData = {
         value: 23,
     },
     comments: {
-        icon: 'comments',
+        icon: 'chat',
         value: 10,
     },
     saves: {
@@ -25,7 +26,7 @@ const dummyData = {
         value: 4,
     },
     shares: {
-        icon: 'share',
+        icon: 'forward',
         value: 7,
     },
 };
@@ -72,8 +73,8 @@ const MCQBody = ({ data }: { data?: IForYouData }) => {
                     <FAIcon name="scroll" size={20} color="orange" />
                     {Object.values(dummyData)?.map(({ icon, value }) => {
                         return (
-                            <View key={icon} style={{ marginTop: 15, alignItems: 'center' }}>
-                                <FAIcon name={icon} size={20} color="#fff" />
+                            <View key={icon} style={{ marginTop: 25, alignItems: 'center' }}>
+                                <EntypoIcon name={icon} size={28} color="#fff" />
                                 <Text style={{ color: '#fff' }}>{value}</Text>
                             </View>
                         );
