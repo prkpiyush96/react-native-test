@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import Swiper from 'react-native-swiper';
 
-import { GET } from '../Services/APIService';
-import { IForYouData } from '../Types';
-import MCQBody from '../Components/MCQBody';
 import { URL_OBJ } from '../Utils/constants';
 import ForYou from '../Components/ForYou';
 
